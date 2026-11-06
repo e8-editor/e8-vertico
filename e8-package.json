@@ -1,0 +1,6 @@
+{
+  "name": "vertico",
+  "description": "Completion candidates listed down the minibuffer, sorted by history, length and name, after vertico.el",
+  "e8": "0.3.1",
+  "requires": {}
+}
