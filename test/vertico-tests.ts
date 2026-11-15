@@ -137,8 +137,9 @@ ertDeftest("vertico-the-minibuffer-may-grow-to-show-vertico-count-lines", () => 
       const [before, after] = minibufferStrings();
       return { lines: e8.frameSize().maxMiniWindowLines, before, after, max: Number(e8.variable("max-mini-window-height")) };
     };
-    // C-g leaves the minibuffer and the macro goes on, as in Emacs.
-    typeAtPrompt(keys, snapshot, seen);
+    // C-g leaves the minibuffer and the macro goes on, as in Emacs; E8
+    // 0.5.9 and earlier ended the macro with quit.
+    e8.conditionCase(() => typeAtPrompt(keys, snapshot, seen), { quit: () => undefined });
     const last = seen[seen.length - 1];
     // Twelve candidates, the ninth selected, and the whole frame to show them in.
     shouldEqual(last.after.split("\n").slice(1, -1), candidates.slice(0, 12));
