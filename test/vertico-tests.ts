@@ -7,7 +7,7 @@
 // the answer once the prompt closes. `make test` runs them in e8 --batch,
 // as CI does.
 
-import { ertDeftest, should, shouldEqual, shouldError } from "ert";
+import { ertDeftest, should, shouldEqual } from "ert";
 import "vertico";
 
 /** One of test/cases.json: a prompt and the keys typed at it. */
@@ -137,7 +137,8 @@ ertDeftest("vertico-the-minibuffer-may-grow-to-show-vertico-count-lines", () => 
       const [before, after] = minibufferStrings();
       return { lines: e8.frameSize().maxMiniWindowLines, before, after, max: Number(e8.variable("max-mini-window-height")) };
     };
-    shouldError(() => typeAtPrompt(keys, snapshot, seen), { type: "quit" });
+    // C-g leaves the minibuffer and the macro goes on, as in Emacs.
+    typeAtPrompt(keys, snapshot, seen);
     const last = seen[seen.length - 1];
     // Twelve candidates, the ninth selected, and the whole frame to show them in.
     shouldEqual(last.after.split("\n").slice(1, -1), candidates.slice(0, 12));
