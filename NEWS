@@ -1,0 +1,46 @@
+vertico NEWS -- history of user-visible changes.
+
+This is the news of e8-vertico, the E8 port of vertico.  'C-h P'
+shows it under the package's description.
+
+
+* Changes in vertico 0.1.0
+
+This is the first release, a port of vertico 2.5 with its vertico-sort
+extension.  It needs E8 0.3.1 or newer.
+
+** 'vertico-mode' lists completion candidates down the minibuffer.
+Every prompt that completes shows them one per line, the first
+selected.  Turning it on turns off icomplete's modes and fido's.
+
+** 'C-n' and 'C-p' select the next and previous candidate.
+'<down>' and '<up>' do too, 'M-<' and 'M->' go to the first and last,
+and 'C-v' and 'M-v' a page on and back.
+
+** 'M-}' and 'M-{' go to the next and previous group.
+
+** 'TAB' puts the selected candidate in the input.
+'RET' takes the selected candidate, 'M-RET' takes the input as typed,
+and 'M-w' copies the selected candidate.
+
+** Candidates are sorted by history, then length, then name.
+'vertico-sort-function' chooses another order, such as
+'vertico-sort-history-alpha', 'vertico-sort-length-alpha' or
+'vertico-sort-alpha'; 'vertico-sort-override-function' overrides it.
+
+** 'vertico-count' says how many candidates show, 10 by default.
+
+** 'vertico-cycle' makes moving past the last candidate go to the first.
+
+** 'vertico-preselect' says what is selected first.
+"first", "prompt", "no-prompt", or "directory", the default.
+
+** 'vertico-scroll-margin' keeps candidates in view around the selected.
+
+** 'vertico-resize' lets the minibuffer shrink as candidates get fewer.
+
+** The list's faces and formats can be changed.
+The faces are 'vertico-current', 'vertico-group-title',
+'vertico-group-separator' and 'vertico-multiline';
+'vertico-count-format' and 'vertico-group-format' say how the count
+and group titles read.
